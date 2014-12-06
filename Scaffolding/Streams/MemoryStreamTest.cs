@@ -1,17 +1,16 @@
-﻿using System.Globalization;
-using System.IO;
-using NFluent;
-
-namespace Streams
+﻿namespace Streams
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NFluent;
+    using System.Globalization;
+    using System.IO;
 
     [TestClass]
     public class MemoryStreamTest
     {
         [TestMethod]
         [DeploymentItem("../../../Resources/Streams/TextFile1.txt")]
-        public void TestMethod1()
+        public void WhenReadFromTextFileIntoMemoryStreamThenBytesCanConvertToCorrectStrings()
         {
             const string fileName = "TextFile1.txt";
             var fileAsBytes = File.ReadAllBytes(fileName);
@@ -22,7 +21,7 @@ namespace Streams
             {
                 for (var i = 0; i < fileAsBytes.Length; i++)
                 {
-                    var charFromByte = System.Text.Encoding.UTF8.GetString(new byte[] { binaryReader.ReadByte() });
+                    var charFromByte = System.Text.Encoding.UTF8.GetString(new[] { binaryReader.ReadByte() });
                     memoryStream.Position--;
                     var charDirectlyFromBinary = binaryReader.ReadChar().ToString(CultureInfo.InvariantCulture);
                     var charFromFile = fileAsString[i].ToString(CultureInfo.InvariantCulture);
