@@ -4,6 +4,7 @@
     using NFluent;
     using System.Globalization;
     using System.IO;
+    using System.Text;
 
     [TestClass]
     public class MemoryStreamTest
@@ -21,7 +22,7 @@
             {
                 for (var i = 0; i < fileAsBytes.Length; i++)
                 {
-                    var charFromByte = System.Text.Encoding.UTF8.GetString(new[] { binaryReader.ReadByte() });
+                    var charFromByte = Encoding.UTF8.GetString(new[] { binaryReader.ReadByte() });
                     memoryStream.Position--;
                     var charDirectlyFromBinary = binaryReader.ReadChar().ToString(CultureInfo.InvariantCulture);
                     var charFromFile = fileAsString[i].ToString(CultureInfo.InvariantCulture);
